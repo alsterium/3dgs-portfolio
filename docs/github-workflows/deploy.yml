@@ -1,0 +1,60 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # Project-site base path; swap VITE_ASSET_BASE_URL here when assets
+      # move to Cloudflare R2 (PRD §6.5 phase 2).
+      BASE_PATH: /${{ github.event.repository.name }}/
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Validate scene manifest
+        run: npm run validate -- --require-thumbs
+
+      - name: Build
+        run: npm run build
+
+      # Best effort on GPU-less runners (SwiftShader). On failure the
+      # committed thumbnails in public/thumbs are shipped instead (§9).
+      - name: Regenerate thumbnails
+        continue-on-error: true
+        run: |
+          npx playwright install --with-deps chromium
+          npm run thumbs
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

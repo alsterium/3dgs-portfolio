@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+/* Design tokens — "1a Cinematic Dark" */
+@theme {
+  --font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-ink: #0b0c0e;
+  --color-paper: #f2f2f0;
+  --color-muted: #7d8085;
+  --color-faint: #5b5f66;
+  --color-fainter: #3f434a;
+  --color-panel: #a9acb1;
+  --color-label: #c9ccd0;
+  --color-line: #2a2d31;
+  --color-line-strong: #33363b;
+  --color-line-soft: #1d2024;
+  --color-thumb: #121316;
+  --color-thumb-line: #26282c;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  overscroll-behavior: none;
+}
+
+/* Hide scrollbars on the carousel rail while keeping it scrollable */
+.rail-scroll {
+  scrollbar-width: none;
+}
+.rail-scroll::-webkit-scrollbar {
+  display: none;
+}
