@@ -2,7 +2,7 @@ import { SparkRenderer, SplatMesh } from "@sparkjsdev/spark";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { resolveAssetUrl } from "../lib/assetUrl";
-import type { Scene } from "../lib/sceneSchema";
+import type { Scene, SceneCamera } from "../lib/sceneSchema";
 import { fetchWithProgress, LruCache, type ProgressInfo } from "./loader";
 import { AutoOrbitController } from "./orbit";
 
@@ -32,6 +32,44 @@ const BASE_FOV = 50;
 const REFERENCE_ASPECT = 1.6;
 /** Ceiling on the widened FOV to keep perspective distortion in check. */
 const MAX_FOV = 90;
+
+/**
+ * Global zoom-in applied on top of each scene's tuned framing so the subject
+ * fills more of the viewport. The camera sits at this fraction of the tuned
+ * distance from the orbit target (0.65 ⇒ ~1.5× larger on screen). Scene
+ * `target`/direction are preserved, so the deliberate off-center framing of
+ * scenes like the bus capture is kept.
+ */
+const FILL_FACTOR = 0.65;
+
+/**
+ * Pull the camera toward the orbit target by {@link FILL_FACTOR} so the subject
+ * fills the frame, keeping the scene's tuned viewing direction and angle. The
+ * zoom limits are scaled with it so the manual zoom range stays proportional.
+ */
+function framedCamera(camera: SceneCamera): SceneCamera {
+  const target = camera.target;
+  const scaleTowardTarget = (p: readonly [number, number, number]) =>
+    [
+      target[0] + (p[0] - target[0]) * FILL_FACTOR,
+      target[1] + (p[1] - target[1]) * FILL_FACTOR,
+      target[2] + (p[2] - target[2]) * FILL_FACTOR,
+    ] as [number, number, number];
+
+  return {
+    ...camera,
+    initialPosition: scaleTowardTarget(camera.initialPosition),
+    orbit: {
+      ...camera.orbit,
+      radius: camera.orbit.radius * FILL_FACTOR,
+      height: camera.orbit.height * FILL_FACTOR,
+    },
+    limits: {
+      minDistance: camera.limits.minDistance * FILL_FACTOR,
+      maxDistance: camera.limits.maxDistance,
+    },
+  };
+}
 
 /**
  * Adapt the vertical FOV to the viewport aspect so the subject stays framed at
@@ -178,7 +216,7 @@ export class ViewerEngine {
   }
 
   private applyCameraForScene(scene: Scene): void {
-    const { camera } = scene;
+    const camera = framedCamera(scene.camera);
     this.controls.minDistance = camera.limits.minDistance;
     this.controls.maxDistance = camera.limits.maxDistance;
     this.controls.target.set(...camera.target);
