@@ -1,0 +1,37 @@
+{
+  "app": {
+    "title": "3DGS PORTFOLIO"
+  },
+  "viewer": {
+    "loading": "LOADING",
+    "orbitHint": "Auto-orbit — drag to rotate / scroll to zoom",
+    "orbitHintShort": "Auto-orbit — drag to control",
+    "webglError": "WebGL is not available in this environment, so the 3D view cannot be shown. Displaying a static thumbnail instead.",
+    "loadError": "Failed to load the scene. Please check your connection and try again.",
+    "retry": "Retry"
+  },
+  "panel": {
+    "specs": "SPECS",
+    "show": "Show",
+    "hide": "Hide",
+    "details": "Details",
+    "fileSize": "File size",
+    "splats": "Splats",
+    "shDegree": "SH degree",
+    "capturedAt": "Captured",
+    "equipment": "Equipment",
+    "pipeline": "Pipeline"
+  },
+  "carousel": {
+    "label": "Scene selection",
+    "prev": "Previous scene",
+    "next": "Next scene"
+  },
+  "lang": {
+    "toggleLabel": "Display language"
+  },
+  "manifest": {
+    "loading": "Loading scene list…",
+    "error": "Failed to load the scene list."
+  }
+}

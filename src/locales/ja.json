@@ -1,0 +1,37 @@
+{
+  "app": {
+    "title": "3DGS PORTFOLIO"
+  },
+  "viewer": {
+    "loading": "LOADING",
+    "orbitHint": "自動オービット中 — ドラッグで回転 / ホイールでズーム",
+    "orbitHintShort": "自動オービット — ドラッグで操作",
+    "webglError": "お使いの環境では WebGL を利用できないため、3D 表示を再生できません。静止画サムネイルを表示しています。",
+    "loadError": "シーンの読み込みに失敗しました。通信環境をご確認のうえ、再度お試しください。",
+    "retry": "再試行"
+  },
+  "panel": {
+    "specs": "SPECS",
+    "show": "開く",
+    "hide": "閉じる",
+    "details": "詳細",
+    "fileSize": "ファイルサイズ",
+    "splats": "スプラット数",
+    "shDegree": "SH次数",
+    "capturedAt": "撮影日",
+    "equipment": "撮影機材",
+    "pipeline": "パイプライン"
+  },
+  "carousel": {
+    "label": "シーン選択",
+    "prev": "前のシーン",
+    "next": "次のシーン"
+  },
+  "lang": {
+    "toggleLabel": "表示言語"
+  },
+  "manifest": {
+    "loading": "シーン一覧を読み込み中…",
+    "error": "シーン一覧の読み込みに失敗しました。"
+  }
+}

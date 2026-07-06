@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# Local env
+.env
+.env.local
+*.local
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+
+# Python (tools/)
+tools/.venv/
+tools/__pycache__/
+**/__pycache__/
+
+# Source assets are never committed (see PRD §6.2)
+*.ply
+
+# Logs
+*.log
