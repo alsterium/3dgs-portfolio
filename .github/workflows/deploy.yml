@@ -17,10 +17,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      # Project-site base path; swap VITE_ASSET_BASE_URL here when assets
-      # move to Cloudflare R2 (PRD §6.5 phase 2).
-      BASE_PATH: /${{ github.event.repository.name }}/
+    # Served from the custom domain 3dgs.alsterium.com at the root path, so
+    # BASE_PATH stays "/" (the vite.config.ts default). public/CNAME pins the
+    # domain. When assets move to Cloudflare R2 (PRD §6.5 phase 2), set
+    # VITE_ASSET_BASE_URL here.
     steps:
       - uses: actions/checkout@v4
 

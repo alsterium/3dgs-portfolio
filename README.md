@@ -7,7 +7,19 @@
 - レンダリング: [Spark](https://sparkjs.dev/)(three.js ベースの 3DGS レンダラ)
 - UI: React + Tailwind CSS / TanStack Router (hash) / TanStack Query / react-i18next (日英)
 - 配信フォーマット: `.spz`(1 ファイル上限 50MB)
-- ホスティング: GitHub Pages(将来 Cloudflare Pages + R2 へ移行可能な構成)
+- ホスティング: GitHub Pages(カスタムドメイン **https://3dgs.alsterium.com**。将来 Cloudflare Pages + R2 へ移行可能な構成)
+
+## カスタムドメイン
+
+`public/CNAME`(`3dgs.alsterium.com`)でカスタムドメインを固定しています。ルート配信のため
+`base` は `/`(GitHub Pages のプロジェクトサイトではなくカスタムドメイン運用)。
+
+- **DNS(Cloudflare)**: サブドメイン `3dgs` の `CNAME` を `alsterium.github.io` に向ける。
+  GitHub が Let's Encrypt 証明書を発行するまでは **DNS only(グレークラウド)** にしておき、
+  HTTPS が有効化されてから必要に応じて Proxied(オレンジ)+ SSL/TLS「Full」に切り替える
+  (「Flexible」はリダイレクトループになるため不可)。
+- **GitHub**: Settings → Pages → Custom domain に `3dgs.alsterium.com` を設定し、
+  証明書発行後に「Enforce HTTPS」を有効化。
 
 ## 開発
 
