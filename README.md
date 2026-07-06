@@ -36,9 +36,6 @@ npm run thumbs     # サムネイル生成(要: build 済み dist/)
 3. `npm run validate && npm run build && npm run thumbs` でサムネイルを生成しコミット
 4. PR → CI(lint / test / スキーマ検証 / ビルド)→ main マージで Pages へ自動デプロイ
 
-同梱の `demo-*` シーンは `node scripts/generate-demo-scenes.mjs` で生成した合成データの
-プレースホルダーです。実シーンが揃ったら置き換えてください。
-
 ## アセット配信の切り替え
 
 アセット(.spz)の配信元は環境変数 `VITE_ASSET_BASE_URL` で切り替えられます(未設定時は

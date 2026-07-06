@@ -140,7 +140,10 @@ try {
     try {
       await page.goto(url, { waitUntil: "domcontentloaded" });
       await page.waitForFunction(() => window.__THUMB_READY === true, null, { timeout: 90_000 });
-      const png = await page.locator("canvas").screenshot({ type: "png" });
+      // Swiftshader (no real GPU on CI/sandboxed runners) makes the readback
+      // slow for larger real-world captures (multi-minute for million-splat
+      // scenes) — give it much more than the 30s default.
+      const png = await page.locator("canvas").screenshot({ type: "png", timeout: 600_000 });
 
       const base = sharp(png);
       await base
