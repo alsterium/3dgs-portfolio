@@ -50,6 +50,9 @@ export function Carousel({ scenes, selectedSlug, lang, onSelect }: CarouselProps
   }, [selectedIndex, scenes.length]);
 
   // Mouse drag-to-scroll; touch devices use native overflow scrolling.
+  // Pointer capture is deferred until the drag threshold is crossed: capturing
+  // on pointerdown would retarget the subsequent click to the rail, so a plain
+  // click on a thumbnail would never reach its button (FR-7).
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     if (e.pointerType !== "mouse" || !railRef.current) return;
     dragRef.current = {
@@ -57,15 +60,17 @@ export function Carousel({ scenes, selectedSlug, lang, onSelect }: CarouselProps
       startScroll: railRef.current.scrollLeft,
       moved: false,
     };
-    e.currentTarget.setPointerCapture?.(e.pointerId);
   };
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     const drag = dragRef.current;
     const rail = railRef.current;
     if (!drag || !rail) return;
     const dx = e.clientX - drag.startX;
-    if (Math.abs(dx) > 5) drag.moved = true;
-    rail.scrollLeft = drag.startScroll - dx;
+    if (!drag.moved && Math.abs(dx) > 5) {
+      drag.moved = true;
+      e.currentTarget.setPointerCapture?.(e.pointerId);
+    }
+    if (drag.moved) rail.scrollLeft = drag.startScroll - dx;
   };
   const onPointerUp = () => {
     if (dragRef.current?.moved) {
