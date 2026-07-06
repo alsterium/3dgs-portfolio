@@ -3,8 +3,9 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
-// BASE_PATH is set by CI when deploying to GitHub Pages project sites
-// (e.g. "/3dgs-portfolio/"). Defaults to "/" for local dev and custom domains.
+// The site is served from the custom domain 3dgs.alsterium.com at the root,
+// so base is "/". BASE_PATH can override it if deployed under a subpath
+// (e.g. "/3dgs-portfolio/" for a GitHub Pages project site).
 export default defineConfig({
   base: process.env.BASE_PATH ?? "/",
   plugins: [react(), tailwindcss()],
