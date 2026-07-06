@@ -23,6 +23,30 @@ const SCENE_CACHE_CAPACITY = 2;
 
 const BACKGROUND_COLOR = 0x0b0c0e;
 
+/** Base vertical field of view the scene cameras are framed for. */
+const BASE_FOV = 50;
+/**
+ * Landscape aspect ratio the scene `radius`/`initialPosition` values are tuned
+ * for. Viewports at least this wide use {@link BASE_FOV} unchanged.
+ */
+const REFERENCE_ASPECT = 1.6;
+/** Ceiling on the widened FOV to keep perspective distortion in check. */
+const MAX_FOV = 90;
+
+/**
+ * Adapt the vertical FOV to the viewport aspect so the subject stays framed at
+ * an appropriate size on every screen. three.js FOV is vertical, so a narrow
+ * (portrait) viewport otherwise shrinks the horizontal field of view and crops
+ * the subject. For aspects below {@link REFERENCE_ASPECT} we widen the vertical
+ * FOV enough to keep the horizontal coverage the scene was framed for.
+ */
+function fovForAspect(aspect: number): number {
+  if (aspect >= REFERENCE_ASPECT) return BASE_FOV;
+  const baseHalfTan = Math.tan(THREE.MathUtils.degToRad(BASE_FOV) / 2);
+  const widened = 2 * Math.atan((baseHalfTan * REFERENCE_ASPECT) / aspect);
+  return Math.min(MAX_FOV, THREE.MathUtils.radToDeg(widened));
+}
+
 declare global {
   interface Window {
     __THUMB_READY?: boolean;
@@ -99,7 +123,7 @@ export class ViewerEngine {
     this.scene3.background = new THREE.Color(BACKGROUND_COLOR);
     this.scene3.add(new SparkRenderer({ renderer: this.renderer }));
 
-    this.camera = new THREE.PerspectiveCamera(50, 1, 0.05, 1000);
+    this.camera = new THREE.PerspectiveCamera(BASE_FOV, 1, 0.05, 1000);
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
     this.controls.enablePan = true;
@@ -116,8 +140,10 @@ export class ViewerEngine {
   private resize(): void {
     const width = Math.max(1, this.container.clientWidth);
     const height = Math.max(1, this.container.clientHeight);
+    const aspect = width / height;
     this.renderer.setSize(width, height);
-    this.camera.aspect = width / height;
+    this.camera.aspect = aspect;
+    this.camera.fov = fovForAspect(aspect);
     this.camera.updateProjectionMatrix();
   }
 
