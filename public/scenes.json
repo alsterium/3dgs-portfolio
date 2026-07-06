@@ -45,7 +45,7 @@
     {
       "slug": "typer",
       "asset": "assets/typer.spz",
-      "fileSizeBytes": 1780280,
+      "fileSizeBytes": 1773804,
       "capturedAt": "2026-07-06",
       "tags": [
         "vehicle",
@@ -69,8 +69,8 @@
         "en": "compressed .ply (SuperSplat) → PlyReader → SpzWriter (.spz, SH0)"
       },
       "camera": {
-        "target": [-0.11, 0.59, -0.6],
-        "initialPosition": [7.8, 0.95, 2.3],
+        "target": [-0.11, -0.59, 0.6],
+        "initialPosition": [7.8, -0.23, 3.5],
         "orbit": {
           "radius": 8.43,
           "height": 0.36,
