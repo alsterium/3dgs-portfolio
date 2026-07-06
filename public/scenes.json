@@ -1,154 +1,214 @@
 {
   "scenes": [
     {
-      "slug": "demo-torus-knot",
-      "asset": "assets/demo-torus-knot.spz",
-      "fileSizeBytes": 322403,
+      "slug": "rz34",
+      "asset": "assets/rz34.spz",
+      "fileSizeBytes": 9643946,
       "capturedAt": "2026-07-06",
       "tags": [
-        "demo",
-        "synthetic"
+        "vehicle",
+        "car"
       ],
-      "shDegree": 0,
+      "shDegree": 3,
       "title": {
-        "ja": "デモ: トーラスノット",
-        "en": "Demo: Torus Knot"
+        "ja": "日産 フェアレディZ (RZ34)",
+        "en": "Nissan Fairlady Z (RZ34)"
       },
       "description": {
-        "ja": "ビューアの動作確認用に生成した合成 3DGS シーン。(2,3) トーラスノットに沿ってガウシアンを配置し、色相を周回方向に変化させている。実写シーンの追加までのプレースホルダー。",
-        "en": "A synthetic 3DGS scene generated to exercise the viewer. Gaussians are distributed along a (2,3) torus knot with hue varying around the loop. Placeholder until real captures land."
+        "ja": "現行型フェアレディZ(RZ34型)を実写スキャンした 3D Gaussian Splatting シーン。球面調和関数(SH3)まで保持しているため、車体塗装の反射・映り込みが視点移動に応じて変化する。",
+        "en": "A real-world capture of the current-generation Nissan Fairlady Z (RZ34 chassis) as a 3D Gaussian Splatting scene. Spherical harmonics up to degree 3 are retained, so the paint's reflections shift realistically as the camera orbits."
       },
       "equipment": {
-        "ja": "合成データ(プロシージャル生成)",
-        "en": "Synthetic (procedurally generated)"
+        "ja": "実写 3DGS キャプチャ",
+        "en": "Real-world 3DGS capture"
       },
       "pipeline": {
-        "ja": "generate-demo-scenes.mjs → SpzWriter (.spz, SH0)",
-        "en": "generate-demo-scenes.mjs → SpzWriter (.spz, SH0)"
+        "ja": "compressed .ply(SuperSplat) → PlyReader → SpzWriter(.spz, SH3)",
+        "en": "compressed .ply (SuperSplat) → PlyReader → SpzWriter (.spz, SH3)"
       },
       "camera": {
-        "target": [
-          0,
-          0.9,
-          0
-        ],
-        "initialPosition": [
-          2.6,
-          1.9,
-          2.6
-        ],
+        "target": [0.6, 1.68, -0.63],
+        "initialPosition": [11.7, 11.52, 10.46],
         "orbit": {
-          "radius": 3.4,
-          "height": 1.7,
-          "speedDegPerSec": 9
-        },
-        "limits": {
-          "minDistance": 1.2,
-          "maxDistance": 8
-        }
-      },
-      "thumbnail": "thumbs/demo-torus-knot.webp",
-      "numSplats": 42000
-    },
-    {
-      "slug": "demo-galaxy",
-      "asset": "assets/demo-galaxy.spz",
-      "fileSizeBytes": 496044,
-      "capturedAt": "2026-07-06",
-      "tags": [
-        "demo",
-        "synthetic"
-      ],
-      "shDegree": 0,
-      "title": {
-        "ja": "デモ: 渦巻銀河",
-        "en": "Demo: Spiral Galaxy"
-      },
-      "description": {
-        "ja": "2 本の渦状腕を持つ銀河を模した合成シーン。中心部は暖色のバルジ、外縁に向かって青方偏移する星色をガウシアンで表現。粒子密度の勾配確認に使用。",
-        "en": "A synthetic scene resembling a two-armed spiral galaxy. A warm central bulge shifts toward blue at the rim. Used to check density gradients in the renderer."
-      },
-      "equipment": {
-        "ja": "合成データ(プロシージャル生成)",
-        "en": "Synthetic (procedurally generated)"
-      },
-      "pipeline": {
-        "ja": "generate-demo-scenes.mjs → SpzWriter (.spz, SH0)",
-        "en": "generate-demo-scenes.mjs → SpzWriter (.spz, SH0)"
-      },
-      "camera": {
-        "target": [
-          0,
-          0.85,
-          0
-        ],
-        "initialPosition": [
-          2.3,
-          2.3,
-          2.3
-        ],
-        "orbit": {
-          "radius": 3.2,
-          "height": 2.1,
+          "radius": 18.52,
+          "height": 4.24,
           "speedDegPerSec": 7
         },
         "limits": {
-          "minDistance": 1.2,
-          "maxDistance": 8
+          "minDistance": 10,
+          "maxDistance": 59
         }
       },
-      "thumbnail": "thumbs/demo-galaxy.webp",
-      "numSplats": 52000
+      "thumbnail": "thumbs/rz34.webp",
+      "numSplats": 374251
     },
     {
-      "slug": "demo-crystal",
-      "asset": "assets/demo-crystal.spz",
-      "fileSizeBytes": 334781,
+      "slug": "typer",
+      "asset": "assets/typer.spz",
+      "fileSizeBytes": 1780280,
       "capturedAt": "2026-07-06",
       "tags": [
-        "demo",
-        "synthetic"
+        "vehicle",
+        "car"
       ],
       "shDegree": 0,
       "title": {
-        "ja": "デモ: クリスタルクラスタ",
-        "en": "Demo: Crystal Cluster"
+        "ja": "ホンダ シビック タイプR",
+        "en": "Honda Civic Type R"
       },
       "description": {
-        "ja": "異方性スケールと回転を持つ細長いガウシアンで結晶柱を構成した合成シーン。楕円スプラットの向き・伸長の検証用。地面には微小なスパークルを散布。",
-        "en": "Synthetic crystal spires built from elongated, rotated gaussians — a stress test for anisotropic splat orientation. Fine sparkles are scattered on the ground plane."
+        "ja": "ホンダ シビック タイプRを実写スキャンした 3D Gaussian Splatting シーン。エアロパーツの造形やボディラインをガウシアンスプラットで再現している。",
+        "en": "A real-world capture of the Honda Civic Type R as a 3D Gaussian Splatting scene, reproducing its aero parts and body lines with gaussian splats."
       },
       "equipment": {
-        "ja": "合成データ(プロシージャル生成)",
-        "en": "Synthetic (procedurally generated)"
+        "ja": "実写 3DGS キャプチャ",
+        "en": "Real-world 3DGS capture"
       },
       "pipeline": {
-        "ja": "generate-demo-scenes.mjs → SpzWriter (.spz, SH0)",
-        "en": "generate-demo-scenes.mjs → SpzWriter (.spz, SH0)"
+        "ja": "compressed .ply(SuperSplat) → PlyReader → SpzWriter(.spz, SH0)",
+        "en": "compressed .ply (SuperSplat) → PlyReader → SpzWriter (.spz, SH0)"
       },
       "camera": {
-        "target": [
-          0,
-          0.6,
-          0
-        ],
-        "initialPosition": [
-          2.1,
-          1.5,
-          2.1
-        ],
+        "target": [-0.11, 0.59, -0.6],
+        "initialPosition": [7.8, 0.95, 2.3],
         "orbit": {
-          "radius": 2.7,
-          "height": 1.3,
+          "radius": 8.43,
+          "height": 0.36,
+          "speedDegPerSec": 8
+        },
+        "limits": {
+          "minDistance": 3,
+          "maxDistance": 25
+        }
+      },
+      "thumbnail": "thumbs/typer.webp",
+      "numSplats": 113123
+    },
+    {
+      "slug": "ct125",
+      "asset": "assets/ct125.spz",
+      "fileSizeBytes": 3100528,
+      "capturedAt": "2026-07-06",
+      "tags": [
+        "vehicle",
+        "motorcycle"
+      ],
+      "shDegree": 0,
+      "title": {
+        "ja": "ホンダ CT125(ハンターカブ)",
+        "en": "Honda CT125 (Hunter Cub)"
+      },
+      "description": {
+        "ja": "ホンダ CT125 ハンターカブを実写スキャンした 3D Gaussian Splatting シーン。フレームまわりの細かな造形までガウシアンスプラットで再現している。",
+        "en": "A real-world capture of the Honda CT125 Hunter Cub as a 3D Gaussian Splatting scene, resolving fine detail around the frame with gaussian splats."
+      },
+      "equipment": {
+        "ja": "実写 3DGS キャプチャ",
+        "en": "Real-world 3DGS capture"
+      },
+      "pipeline": {
+        "ja": "compressed .ply(SuperSplat) → PlyReader → SpzWriter(.spz, SH0)",
+        "en": "compressed .ply (SuperSplat) → PlyReader → SpzWriter (.spz, SH0)"
+      },
+      "camera": {
+        "target": [-0.33, 0.92, -0.07],
+        "initialPosition": [2.06, 3.04, 2.33],
+        "orbit": {
+          "radius": 4,
+          "height": 0.92,
           "speedDegPerSec": 10
         },
         "limits": {
-          "minDistance": 0.9,
-          "maxDistance": 7
+          "minDistance": 2.2,
+          "maxDistance": 13
         }
       },
-      "thumbnail": "thumbs/demo-crystal.webp",
-      "numSplats": 40436
+      "thumbnail": "thumbs/ct125.webp",
+      "numSplats": 207075
+    },
+    {
+      "slug": "gixxer",
+      "asset": "assets/gixxer.spz",
+      "fileSizeBytes": 1974350,
+      "capturedAt": "2026-07-06",
+      "tags": [
+        "vehicle",
+        "motorcycle"
+      ],
+      "shDegree": 0,
+      "title": {
+        "ja": "スズキ GIXXER125",
+        "en": "Suzuki GIXXER125"
+      },
+      "description": {
+        "ja": "スズキ GIXXER125 を実写スキャンした 3D Gaussian Splatting シーン。スポーティなカウルとタンク形状をガウシアンスプラットで再現している。",
+        "en": "A real-world capture of the Suzuki GIXXER125 as a 3D Gaussian Splatting scene, reproducing its sporty cowl and tank shape with gaussian splats."
+      },
+      "equipment": {
+        "ja": "実写 3DGS キャプチャ",
+        "en": "Real-world 3DGS capture"
+      },
+      "pipeline": {
+        "ja": "compressed .ply(SuperSplat) → PlyReader → SpzWriter(.spz, SH0)",
+        "en": "compressed .ply (SuperSplat) → PlyReader → SpzWriter (.spz, SH0)"
+      },
+      "camera": {
+        "target": [-0.05, 0.72, -0.12],
+        "initialPosition": [2.09, 2.62, 2.01],
+        "orbit": {
+          "radius": 3.56,
+          "height": 0.82,
+          "speedDegPerSec": 10
+        },
+        "limits": {
+          "minDistance": 1.93,
+          "maxDistance": 11.4
+        }
+      },
+      "thumbnail": "thumbs/gixxer.webp",
+      "numSplats": 129141
+    },
+    {
+      "slug": "bus",
+      "asset": "assets/bus.spz",
+      "fileSizeBytes": 16099477,
+      "capturedAt": "2026-07-06",
+      "tags": [
+        "vehicle",
+        "bus"
+      ],
+      "shDegree": 0,
+      "title": {
+        "ja": "バス",
+        "en": "Bus"
+      },
+      "description": {
+        "ja": "草木に埋もれた 2 台の廃バスを実写スキャンした 3D Gaussian Splatting シーン。周囲の植生を含む広範囲を大規模にキャプチャしている。",
+        "en": "A real-world capture of two abandoned buses overgrown with vegetation, as a 3D Gaussian Splatting scene — a large-scale capture spanning the surrounding foliage."
+      },
+      "equipment": {
+        "ja": "実写 3DGS キャプチャ",
+        "en": "Real-world 3DGS capture"
+      },
+      "pipeline": {
+        "ja": "compressed .ply(SuperSplat) → PlyReader → SpzWriter(.spz, SH0)",
+        "en": "compressed .ply (SuperSplat) → PlyReader → SpzWriter (.spz, SH0)"
+      },
+      "camera": {
+        "target": [-9.9, 5, 22.6],
+        "initialPosition": [-2.9, 8, 13.6],
+        "orbit": {
+          "radius": 11.4,
+          "height": 3,
+          "speedDegPerSec": 6
+        },
+        "limits": {
+          "minDistance": 6,
+          "maxDistance": 45
+        }
+      },
+      "thumbnail": "thumbs/bus.webp",
+      "numSplats": 1011788
     }
   ]
 }
